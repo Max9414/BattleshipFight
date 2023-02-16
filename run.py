@@ -33,7 +33,7 @@ class Battleship:
         print(self.ship_col)
         self.print_board()
         for turn in range(self.turns):
-            print("Turn", self.turns - 1)
+            print("Turn", turn + 1)
             while True:
                 guess_row = int(input(f"Guess row (0-{self.size - 1})"))
                 guess_col = int(input(f"Guess column (0-{self.size - 1})"))
@@ -42,9 +42,16 @@ class Battleship:
                 if t:
                     print("Fire!!")
                     break
-            if guess_row in self.ship_row and guess_col in self.ship_col:
+            for i in range(self.ships):
+                if guess_row == self.ship_row[i] and guess_col == self.ship_col[i]:
+                    hit = True
+                    self.score += 1
+                    break
+                else:
+                    hit = False
+                
+            if hit:
                 print("Good Job! You hit a Battleship!!")
-                self.score += 1
             else:
                 print("Nice try, shoot again!")
 
