@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Battleship:
     """
     Game class. The class will provide the player with the choice
@@ -10,4 +11,7 @@ class Battleship:
         self.size = size
         self.ships = ships
         self.turns = turns
+        self.board = []
+        self.ship_row = []
+        self.ship_col = []
 
