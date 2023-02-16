@@ -27,6 +27,8 @@ class Battleship:
         """
         Method that starts the game and allows player to play
         """
+        print("Let's play!")
+        self.print_board()
         print("Turn", self.turns - 1)
         guess_row = int(input("Guess row (0-{})".format(self.size - 1)))
         guess_col = int(input("Guess column (0-{})".format(self.size - 1)))
@@ -50,7 +52,6 @@ class Battleship:
         """
         for row in self.board:
             print(" ".join(row))
-    
-    self.print_board()
+
 
 Battleship(5, 3, 5)
