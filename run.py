@@ -14,6 +14,7 @@ class Battleship:
         self.board = []
         self.ship_row = []
         self.ship_col = []
+        self.score = 0
 
         for i in range(size):
             self.board.append(["O"] * size)
@@ -38,17 +39,22 @@ class Battleship:
             if t:
                 print("Fire!!")
                 break
+        if guess_row in self.ship_row and guess_col in self.ship_col:
+            print("Good Job! You hit a Battleship!!")
+            
 
     def validate_choice(self, guess_row, guess_col):
         """
         Checks if choices input are valid 
         """
         try:   
-            if guess_row < 0 or guess_row >= self.size or guess_col < 0 or guess_col >= self.size:
+            if (guess_row < 0 or guess_row >= self.size 
+                or guess_col < 0 or guess_col >= self.size):
                 raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
         except ValueError as e:
             print(f"Invalid data: {e}, please try again.")
             return False
+        return True
 
     def _generate_ship_location(self):
         """
