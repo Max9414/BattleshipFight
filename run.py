@@ -32,20 +32,21 @@ class Battleship:
         print(self.ship_row)
         print(self.ship_col)
         self.print_board()
-        print("Turn", self.turns - 1)
-        while True:
-            guess_row = int(input(f"Guess row (0-{self.size - 1})"))
-            guess_col = int(input(f"Guess column (0-{self.size - 1})"))
-            t = self.validate_choice(guess_row, guess_col)
-            
-            if t:
-                print("Fire!!")
-                break
-        if guess_row in self.ship_row and guess_col in self.ship_col:
-            print("Good Job! You hit a Battleship!!")
-            self.score += 1
-        else:
-            print("Nice try, shoot again!")
+        for turn in range(self.turns):
+            print("Turn", self.turns - 1)
+            while True:
+                guess_row = int(input(f"Guess row (0-{self.size - 1})"))
+                guess_col = int(input(f"Guess column (0-{self.size - 1})"))
+                t = self.validate_choice(guess_row, guess_col)
+
+                if t:
+                    print("Fire!!")
+                    break
+            if guess_row in self.ship_row and guess_col in self.ship_col:
+                print("Good Job! You hit a Battleship!!")
+                self.score += 1
+            else:
+                print("Nice try, shoot again!")
 
     def validate_choice(self, guess_row, guess_col):
         """
