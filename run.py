@@ -56,7 +56,11 @@ class Battleship:
             if hit:
                 print("Good Job! You hit a Battleship!!\n")
             else:
-                print("Nice try, shoot again!\n")
+                if turn == self.turns - 1:
+                    print("Nice try, your chances are over!")
+                    break
+                else:
+                    print("Nice try, shoot again!\n")
             
             self.print_board()
 
