@@ -41,6 +41,7 @@ class Battleship:
 
                 if t:
                     print("Fire!!")
+                    self.board[guess_row][guess_col] = "X"
                     break
             for i in range(self.ships):
                 if guess_row == self.ship_row[i] and guess_col == self.ship_col[i]:
@@ -54,6 +55,12 @@ class Battleship:
                 print("Good Job! You hit a Battleship!!")
             else:
                 print("Nice try, shoot again!")
+            
+            self.print_board()
+
+            if self.score == self.ships:
+                print("You destroyed all the ships! Good job!!")
+                break
 
     def validate_choice(self, guess_row, guess_col):
         """
