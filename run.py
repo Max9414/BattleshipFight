@@ -40,9 +40,10 @@ class Battleship:
                 t = self.validate_choice(guess_row, guess_col)
 
                 if t:
-                    print("Fire!!\n")
-                    self.board[guess_row][guess_col] = "X"
+                    print("\nFire!!\n")
+                    self.board[guess_row][guess_col] = "X" #changes the O into X
                     break
+
             for i in range(self.ships):
                 if guess_row == self.ship_row[i] and guess_col == self.ship_col[i]:
                     hit = True
@@ -70,6 +71,8 @@ class Battleship:
             if (guess_row < 0 or guess_row >= self.size 
                 or guess_col < 0 or guess_col >= self.size):
                 raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
+            elif self.board[guess_row][guess_col] == "X":
+                raise ValueError(f"You shot here already! {guess_row} {guess_col}")
         except ValueError as e:
             print(f"Invalid data: {e}, please try again.")
             return False
