@@ -41,6 +41,9 @@ class Battleship:
                 break
         if guess_row in self.ship_row and guess_col in self.ship_col:
             print("Good Job! You hit a Battleship!!")
+            self.score += 1
+        else:
+            print("Nice try, shoot again!")
             
 
     def validate_choice(self, guess_row, guess_col):
