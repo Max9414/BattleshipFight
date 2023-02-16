@@ -15,9 +15,8 @@ class Battleship:
         self.ship_row = []
         self.ship_col = []
 
-    
-    for i in range(size):
-        self.board.append(["O"] * size)
-        print(self.board)
+        for i in range(size):
+            self.board.append(["O"] * size)
+
 
 Battleship(5, 3, 5)
