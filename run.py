@@ -23,6 +23,16 @@ class Battleship:
             self.ship_row.append(row)
             self.ship_col.append(col)
 
+    def play(self):
+        """
+        Method that starts the game and allows player to play
+        """
+        print("Turn", self.turns - 1)
+        guess_row = int(input("Guess row (0-{})".format(self.size - 1)))
+        guess_col = int(input("Guess column (0-{})".format(self.size - 1)))
+        print(guess_col)
+        print(guess_row)
+
     def _generate_ship_location(self):
         """
         Generate the random position of the ships,
