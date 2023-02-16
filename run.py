@@ -29,6 +29,8 @@ class Battleship:
         Method that starts the game and allows player to play
         """
         print("Let's play!")
+        print(self.ship_row)
+        print(self.ship_col)
         self.print_board()
         print("Turn", self.turns - 1)
         while True:
@@ -44,7 +46,6 @@ class Battleship:
             self.score += 1
         else:
             print("Nice try, shoot again!")
-            
 
     def validate_choice(self, guess_row, guess_col):
         """
