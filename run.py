@@ -32,8 +32,6 @@ class Battleship:
         It will keep asking for coordinates till valid ones are chosen.
         """
         print("Let's play!\n")
-        print(self.ship_row)
-        print(self.ship_col)
         self.print_board()
         for turn in range(self.turns):
             print("Turn", turn + 1 ,"\n")
