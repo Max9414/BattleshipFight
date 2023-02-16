@@ -35,7 +35,12 @@ class Battleship:
                 return row, col
 
     def print_board(self):
+        """
+        Generate the board in a suitable way to play battleship.
+        """
         for row in self.board:
             print(" ".join(row))
+    
+    self.print_board()
 
 Battleship(5, 3, 5)
