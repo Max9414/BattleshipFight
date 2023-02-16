@@ -34,7 +34,7 @@ class Battleship:
         print("Let's play!\n")
         self.print_board()
         for turn in range(self.turns):
-            print("Turn", turn + 1 ,"\n")
+            print("Turn", turn + 1,"\n")
             while True:
                 guess_row = int(input(f"Guess row (0-{self.size - 1})"))
                 guess_col = int(input(f"Guess column (0-{self.size - 1})"))
@@ -98,5 +98,9 @@ class Battleship:
             print(" ".join(row))
 
 
-game = Battleship(5, 3, 5)
+size = int(input("How many rows and columns would you like to create? "))
+ships = int(input("How many ships would you like to be on the board? "))
+turns = int(input("How many turns would you like to have to play? "))
+
+game = Battleship(size, ships, turns)
 game.play()
