@@ -54,4 +54,5 @@ class Battleship:
             print(" ".join(row))
 
 
-Battleship(5, 3, 5)
+game = Battleship(5, 3, 5)
+game.play()
