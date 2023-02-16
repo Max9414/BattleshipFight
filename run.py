@@ -29,6 +29,7 @@ class Battleship:
     def play(self):
         """
         Method that starts the game and allows player to play
+        It will keep asking for coordinates till valid ones are chosen.
         """
         print("Let's play!\n")
         print(self.ship_row)
