@@ -16,9 +16,11 @@ class Battleship:
         self.ship_col = []
         self.score = 0
 
+        # Creates the board without showing ships positions
         for i in range(size):
             self.board.append(["O"] * size)
 
+        # Creates randomly the ships position
         for i in range(ships):
             row, col = self._generate_ship_location()
             self.ship_row.append(row)
@@ -41,7 +43,7 @@ class Battleship:
 
                 if t:
                     print("\nFire!!\n")
-                    self.board[guess_row][guess_col] = "X" #changes the O into X
+                    self.board[guess_row][guess_col] = "X"  # changes the O into X
                     break
 
             for i in range(self.ships):
