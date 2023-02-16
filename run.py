@@ -30,10 +30,25 @@ class Battleship:
         print("Let's play!")
         self.print_board()
         print("Turn", self.turns - 1)
-        guess_row = int(input("Guess row (0-{})".format(self.size - 1)))
-        guess_col = int(input("Guess column (0-{})".format(self.size - 1)))
-        print(guess_col)
-        print(guess_row)
+        while True:
+            guess_row = int(input(f"Guess row (0-{self.size - 1})"))
+            guess_col = int(input(f"Guess column (0-{self.size - 1})"))
+            t = self.validate_choice(guess_row, guess_col)
+            
+            if t:
+                print("Fire!!")
+                break
+
+    def validate_choice(self, guess_row, guess_col):
+        """
+        Checks if choices input are valid 
+        """
+        try:   
+            if guess_row < 0 or guess_row >= self.size or guess_col < 0 or guess_col >= self.size:
+                raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
+        except ValueError as e:
+            print(f"Invalid data: {e}, please try again.")
+            return False
 
     def _generate_ship_location(self):
         """
