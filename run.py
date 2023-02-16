@@ -24,12 +24,18 @@ class Battleship:
             self.ship_col.append(col)
 
     def _generate_ship_location(self):
+        """
+        Generate the random position of the ships,
+        without showing it visually on the screen.
+        """
         while True:
             row = randint(0, self.size - 1)
             col = randint(0, self.size - 1)
             if row not in self.ship_row and col not in self.ship_col:
                 return row, col
-            
 
+    def print_board(self):
+        for row in self.board:
+            print(" ".join(row))
 
 Battleship(5, 3, 5)
