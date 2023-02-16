@@ -28,19 +28,19 @@ class Battleship:
         """
         Method that starts the game and allows player to play
         """
-        print("Let's play!")
+        print("Let's play!\n")
         print(self.ship_row)
         print(self.ship_col)
         self.print_board()
         for turn in range(self.turns):
-            print("Turn", turn + 1)
+            print("Turn", turn + 1 ,"\n")
             while True:
                 guess_row = int(input(f"Guess row (0-{self.size - 1})"))
                 guess_col = int(input(f"Guess column (0-{self.size - 1})"))
                 t = self.validate_choice(guess_row, guess_col)
 
                 if t:
-                    print("Fire!!")
+                    print("Fire!!\n")
                     self.board[guess_row][guess_col] = "X"
                     break
             for i in range(self.ships):
@@ -52,14 +52,14 @@ class Battleship:
                     hit = False
                 
             if hit:
-                print("Good Job! You hit a Battleship!!")
+                print("Good Job! You hit a Battleship!!\n")
             else:
-                print("Nice try, shoot again!")
+                print("Nice try, shoot again!\n")
             
             self.print_board()
 
             if self.score == self.ships:
-                print("You destroyed all the ships! Good job!!")
+                print("You destroyed all the ships! Good job!!\n")
                 break
 
     def validate_choice(self, guess_row, guess_col):
