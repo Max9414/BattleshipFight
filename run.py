@@ -12,6 +12,7 @@ class Battleship:
         self.ships = ships
         self.turns = turns
         self.board = []
+        self.pc_board = []
         self.ship_row = []
         self.ship_col = []
         self.score = 0
@@ -19,6 +20,7 @@ class Battleship:
         # Creates the board without showing ships positions
         for i in range(size):
             self.board.append(["O"] * size)
+            self.pc_board.append(["O"] * size)
 
         # Creates randomly the ships position
         for i in range(ships):
@@ -31,8 +33,10 @@ class Battleship:
         Method that starts the game and allows player to play
         It will keep asking for coordinates till valid ones are chosen.
         """
+        
         print("Let's play!\n")
-        self.print_board()
+        self.print_board(self.board)
+        self.print_board(self.pc_board)
         for turn in range(self.turns):
             print("Turn", turn + 1,"\n")
             while True:
@@ -62,7 +66,7 @@ class Battleship:
                 else:
                     print("Nice try, shoot again!\n")
             
-            self.print_board()
+            self.print_board(self.board)
 
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
@@ -94,11 +98,11 @@ class Battleship:
             if row not in self.ship_row and col not in self.ship_col:
                 return row, col
 
-    def print_board(self):
+    def print_board(self, board):
         """
         Generate the board in a suitable way to play battleship.
         """
-        for row in self.board:
+        for row in board:
             print(" ".join(row))
 
 
