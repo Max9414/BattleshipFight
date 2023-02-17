@@ -35,7 +35,9 @@ class Battleship:
         """
         
         print("Let's play!\n")
+        print("Your board\n")
         self.print_board(self.board)
+        print("\nPC board\n")
         self.print_board(self.pc_board)
         for turn in range(self.turns):
             print("Turn", turn + 1,"\n")
