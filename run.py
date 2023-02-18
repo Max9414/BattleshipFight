@@ -15,6 +15,8 @@ class Battleship:
         self.pc_board = []
         self.ship_row = []
         self.ship_col = []
+        self.ship_row_pc = []
+        self.ship_col_pc = []
         self.score = 0
 
         # Creates the board without showing ships positions
@@ -27,6 +29,10 @@ class Battleship:
             row, col = self._generate_ship_location()
             self.ship_row.append(row)
             self.ship_col.append(col)
+            self.board[self.ship_row[i]][self.ship_col[i]] = "@"
+            row, col = self._generate_ship_location()
+            self.ship_row_pc.append(row)
+            self.ship_col_pc.append(col)
 
     def play(self):
         """
@@ -34,13 +40,14 @@ class Battleship:
         It will keep asking for coordinates till valid ones are chosen.
         """
         
+        print(self.ship_row, self.ship_col)
         print("Let's play!\n")
         print("Your board\n")
         self.print_board(self.board)
         print("\nPC board\n")
         self.print_board(self.pc_board)
         for turn in range(self.turns):
-            print("Turn", turn + 1,"\n")
+            print("\nTurn", turn + 1, "\n")
             while True:
                 guess_row = int(input(f"Guess row (0-{self.size - 1})"))
                 guess_col = int(input(f"Guess column (0-{self.size - 1})"))
