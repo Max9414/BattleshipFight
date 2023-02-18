@@ -24,7 +24,7 @@ class Battleship:
             self.board.append(["O"] * size)
             self.pc_board.append(["O"] * size)
 
-        # Creates randomly the ships position
+        # Creates randomly the ships position for pc and player
         for i in range(ships):
             row, col = self._generate_ship_location()
             self.ship_row.append(row)
@@ -39,13 +39,8 @@ class Battleship:
         Method that starts the game and allows player to play
         It will keep asking for coordinates till valid ones are chosen.
         """
-        
-        print(self.ship_row, self.ship_col)
         print("Let's play!\n")
-        print("Your board\n")
-        self.print_board(self.board)
-        print("\nPC board\n")
-        self.print_board(self.pc_board)
+        self.print_boards()
         for turn in range(self.turns):
             print("\nTurn", turn + 1, "\n")
             while True:
@@ -55,11 +50,11 @@ class Battleship:
 
                 if t:
                     print("\nFire!!\n")
-                    self.board[guess_row][guess_col] = "X"  # changes the O into X
+                    self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
                     break
 
             for i in range(self.ships):
-                if guess_row == self.ship_row[i] and guess_col == self.ship_col[i]:
+                if guess_row == self.ship_row_pc[i] and guess_col == self.ship_col_pc[i]:
                     hit = True
                     self.score += 1
                     break
@@ -75,7 +70,7 @@ class Battleship:
                 else:
                     print("Nice try, shoot again!\n")
             
-            self.print_board(self.board)
+            self.print_boards()
 
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
@@ -107,12 +102,23 @@ class Battleship:
             if row not in self.ship_row and col not in self.ship_col:
                 return row, col
 
-    def print_board(self, board):
+    def show_board(self, board):
         """
         Generate the board in a suitable way to play battleship.
         """
         for row in board:
             print(" ".join(row))
+
+    def print_boards(self):
+        """
+        To avoid repetition, created method to print the boards
+        to play the game that will be used at the beginning and 
+        end for the play metod
+        """
+        print("Your board\n")
+        self.show_board(self.board)
+        print("\nPC board\n")
+        self.show_board(self.pc_board)
 
 
 size = int(input("How many rows and columns would you like to create? "))
