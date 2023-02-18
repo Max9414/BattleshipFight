@@ -121,9 +121,28 @@ class Battleship:
         self.show_board(self.pc_board)
 
 
-size = int(input("How many rows and columns would you like to create? "))
-ships = int(input("How many ships would you like to be on the board? "))
-turns = int(input("How many turns would you like to have to play? "))
+def check_inputs(choice):
+    """
+    Checker for input choices from player
+    """
+    while True:
+        if choice >= 10 or choice < 3:
+            choice = int(input("Please select a number between 3 and 9 "))
+        else:
+            print(f"{choice} selected")
+            break
+    return choice
+
+
+size = int(input("How many rows and columns would you like to create?\n "
+                 "Please select a number between 3 and 9 "))
+size = check_inputs(size)
+ships = int(input("How many ships would you like to be on the board?\n "
+                  "Please select a number between 3 and 9 "))
+ships = check_inputs(ships)
+turns = int(input("How many turns would you like to have to play?\n "
+                  "Please select a number between 3 and 9 "))
+turns = check_inputs(turns)
 
 game = Battleship(size, ships, turns)
 game.play()
