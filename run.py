@@ -7,10 +7,10 @@ class Battleship:
     to create the grid with as many rows and columns he wants from
     a minimum of 4 to a maximum of 8, for playability reasons.
     """
-    def __init__(self, size, ships, turns):
-        self.size = size
-        self.ships = ships
-        self.turns = turns
+    def __init__(self, board_size, nr_ships, nr_turns):
+        self.size = board_size
+        self.ships = nr_ships
+        self.turns = nr_turns
         self.board = []
         self.pc_board = []
         self.ship_row = []
@@ -81,12 +81,14 @@ class Battleship:
         Checks if choices input are valid 
         """
         try:   
+            guess_row = int(guess_row)
+            guess_col = int(guess_col)
             if (guess_row < 0 or guess_row >= self.size 
                 or guess_col < 0 or guess_col >= self.size):
                 raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
             elif self.board[guess_row][guess_col] == "X":
                 raise ValueError(f"You shot here already! {guess_row} {guess_col}")
-        except ValueError as e:
+        except Exception as e:
             print(f"Invalid data: {e}, please try again.")
             return False
         return True
@@ -102,7 +104,7 @@ class Battleship:
             if row not in self.ship_row and col not in self.ship_col:
                 return row, col
 
-    def show_board(self, board):
+    def _show_board(self, board):
         """
         Generate the board in a suitable way to play battleship.
         """
@@ -116,9 +118,9 @@ class Battleship:
         end for the play metod
         """
         print("Your board\n")
-        self.show_board(self.board)
+        self._show_board(self.board)
         print("\nPC board\n")
-        self.show_board(self.pc_board)
+        self._show_board(self.pc_board)
 
 
 def check_inputs(choice):
@@ -134,15 +136,19 @@ def check_inputs(choice):
     return choice
 
 
-size = int(input("How many rows and columns would you like to create?\n "
-                 "Please select a number between 3 and 9 "))
-size = check_inputs(size)
-ships = int(input("How many ships would you like to be on the board?\n "
-                  "Please select a number between 3 and 9 "))
-ships = check_inputs(ships)
-turns = int(input("How many turns would you like to have to play?\n "
-                  "Please select a number between 3 and 9 "))
-turns = check_inputs(turns)
+try:
+    size = int(input("How many rows and columns would you like to create?\n "
+                     "Please select a number between 3 and 9 "))
+    size = check_inputs(size)
+    ships = int(input("How many ships would you like to be on the board?\n "
+                      "Please select a number between 3 and 9 "))
+    ships = check_inputs(ships)
+    turns = int(input("How many turns would you like to have to play?\n "
+                      "Please select a number between 3 and 9 "))
+    turns = check_inputs(turns)
+except ValueError:
+    print("Invalid input! Please enter a valid integer value.")
+
 
 game = Battleship(size, ships, turns)
 game.play()
