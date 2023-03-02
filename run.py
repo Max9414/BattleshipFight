@@ -60,7 +60,7 @@ class Battleship:
                     break
                 else:
                     hit = False
-                
+
             if hit:
                 print("Good Job! You hit a Battleship!!\n")
             else:
@@ -69,7 +69,7 @@ class Battleship:
                     break
                 else:
                     print("Nice try, shoot again!\n")
-            
+
             self.print_boards()
 
             if self.score == self.ships:
@@ -78,13 +78,12 @@ class Battleship:
 
     def validate_choice(self, guess_row, guess_col):
         """
-        Checks if choices input are valid 
+        Checks if choices input are valid
         """
-        try:   
+        try:
             guess_row = int(guess_row)
             guess_col = int(guess_col)
-            if (guess_row < 0 or guess_row >= self.size 
-                or guess_col < 0 or guess_col >= self.size):
+            if (guess_row < 0 or guess_row >= self.size or guess_col < 0 or guess_col >= self.size):
                 raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
             elif self.board[guess_row][guess_col] == "X":
                 raise ValueError(f"You shot here already! {guess_row} {guess_col}")
@@ -114,7 +113,7 @@ class Battleship:
     def print_boards(self):
         """
         To avoid repetition, created method to print the boards
-        to play the game that will be used at the beginning and 
+        to play the game that will be used at the beginning and
         end for the play metod
         """
         print("Your board\n")
