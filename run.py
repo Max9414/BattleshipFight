@@ -27,13 +27,24 @@ class Battleship:
 
         # Creates randomly the ships position for pc and player
         for i in range(self.ships):
-            row, col = self._generate_ship_location(self.ship_row, self.ship_col)
+            input("Press enter to continue...")
+            row, col = self._generate_ship_location(
+                self.ship_row, self.ship_col
+            )
             self.ship_row.append(row)
             self.ship_col.append(col)
             self.board[self.ship_row[i]][self.ship_col[i]] = "@"
-            row, col = self._generate_ship_location(self.ship_row_pc, self.ship_col_pc)
+            row, col = self._generate_ship_location(
+                self.ship_row_pc, self.ship_col_pc
+            )
             self.ship_row_pc.append(row)
             self.ship_col_pc.append(col)
+            print(
+                self.ship_row,
+                self.ship_col,
+                self.ship_row_pc,
+                self.ship_col_pc,
+            )
 
     def play(self):
         """
@@ -57,7 +68,9 @@ class Battleship:
                 guess_row = int(guess_row)
                 guess_col = int(guess_col)
                 print("\nFire!!\n")
-                self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
+                self.pc_board[guess_row][
+                    guess_col
+                ] = "X"  # changes the O into X
 
             for i in range(self.ships):
                 if (
@@ -92,7 +105,9 @@ class Battleship:
         try:
             guess = int(guess)
             if guess < 0 or guess >= self.size:
-                raise ValueError(f"the value must be between 0 and {self.size - 1}")
+                raise ValueError(
+                    f"the value must be between 0 and {self.size - 1}"
+                )
             return True
         except Exception as e:
             print(f"Invalid data: {e}, please try again.\n")
