@@ -8,7 +8,6 @@ class Battleship:
     a minimum of 4 to a maximum of 8, for playability reasons.
     """
     def __init__(self, board_size, nr_ships, nr_turns):
-        print("start of init")
         self.size = board_size
         self.ships = nr_ships
         self.turns = nr_turns
@@ -27,15 +26,13 @@ class Battleship:
 
         # Creates randomly the ships position for pc and player
         for i in range(self.ships):
-            row, col = self._generate_ship_location()
+            row, col = self._generate_ship_location(self.ship_row, self.ship_col)
             self.ship_row.append(row)
             self.ship_col.append(col)
             self.board[self.ship_row[i]][self.ship_col[i]] = "@"
-            row, col = self._generate_ship_location()
+            row, col = self._generate_ship_location(self.ship_row_pc, self.ship_col_pc)
             self.ship_row_pc.append(row)
             self.ship_col_pc.append(col)
-
-        print("end of init")
 
     def play(self):
         """
@@ -97,18 +94,17 @@ class Battleship:
             return False
         return True
 
-    def _generate_ship_location(self):
+    def _generate_ship_location(self, ship_row, ship_col):
         """
         Generate the random position of the ships,
         without showing it visually on the screen.
         """
-        print("Generate ship start")
         while True:
             row = randint(0, self.size - 1)
             col = randint(0, self.size - 1)
-            if row not in self.ship_row and col not in self.ship_col:
-                return row, col
-        print("End of generate ships")
+            if row not in ship_row and col not in ship_col:
+                break
+        return row, col
 
     def _show_board(self, board):
         """
