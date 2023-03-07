@@ -45,14 +45,18 @@ class Battleship:
             print("\nTurn", turn + 1, "\n")
             choice = False
             while not choice:
-                guess_row = int(input(f"Guess row (0-{self.size - 1})"))
-                guess_col = int(input(f"Guess column (0-{self.size - 1})"))
-                choice = self.validate_choice(guess_row, guess_col)
+                guess_row = input(f"Select row (0-{self.size - 1})")
+                choice = self.validate_choice(guess_row)
+            choice = False
+            while not choice:
+                guess_col = input(f"Select column (0-{self.size - 1})")
+                choice = self.validate_choice(guess_col)
 
-                if choice:
-                    print("\nFire!!\n")
-                    self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
-                    break
+            if choice:
+                guess_row = int(guess_row)
+                guess_col = int(guess_col)
+                print("\nFire!!\n")
+                self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
 
             for i in range(self.ships):
                 if (guess_row == self.ship_row_pc[i] and
@@ -78,21 +82,17 @@ class Battleship:
                 print("You destroyed all the ships! Good job!!\n")
                 break
 
-    def validate_choice(self, guess_row, guess_col):
+    def validate_choice(self, guess):
         """
         Checks if choices input are valid
         """
         try:
-            guess_row = int(guess_row)
-            guess_col = int(guess_col)
-            if (guess_row < 0 or guess_row >= self.size or guess_col < 0 or guess_col >= self.size):
-                raise ValueError(f"Please insert a value between 0 and {self.size - 1}")
-            elif self.board[guess_row][guess_col] == "X":
-                raise ValueError(f"You shot here already! {guess_row} {guess_col}")
+            guess = int(guess)
+            if (guess < 0 or guess >= self.size):
+                raise ValueError(f"the value must be between 0 and {self.size - 1}")
+            return True
         except Exception as e:
-            print(f"Invalid data: {e}, please try again.")
-            return False
-        return True
+            print(f"Invalid data: {e}, please try again.\n")
 
     def _generate_ship_location(self, ship_row, ship_col):
         """
@@ -137,23 +137,22 @@ def check_inputs(choice):
             break
     return choice
 
+
 while True:
     try:
         size = int(input("How many rows and columns would you like to create?\n "
-                        "Please select a number between 3 and 9 "))
+                         "Please select a number between 3 and 9 "))
         size = check_inputs(size)
         ships = int(input("How many ships would you like to be on the board?\n "
-                        "Please select a number between 3 and 9 "))
+                          "Please select a number between 3 and 9 "))
         ships = check_inputs(ships)
         turns = int(input("How many turns would you like to have to play?\n "
-                        "Please select a number between 3 and 9 "))
+                          "Please select a number between 3 and 9 "))
         turns = check_inputs(turns)
         break
     except ValueError:
-        print("Invalid input! Please enter a valid integer value.")
+        print("Invalid input! Please enter a valid integer value.\n")
 
-print(size)
-print(ships)
-print(turns)
+
 game = Battleship(size, ships, turns)
 game.play()
