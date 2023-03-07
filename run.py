@@ -7,6 +7,7 @@ class Battleship:
     to create the grid with as many rows and columns he wants from
     a minimum of 4 to a maximum of 8, for playability reasons.
     """
+
     def __init__(self, board_size, nr_ships, nr_turns):
         self.size = board_size
         self.ships = nr_ships
@@ -59,8 +60,10 @@ class Battleship:
                 self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
 
             for i in range(self.ships):
-                if (guess_row == self.ship_row_pc[i] and
-                    guess_col == self.ship_col_pc[i]):
+                if (
+                    guess_row == self.ship_row_pc[i]
+                    and guess_col == self.ship_col_pc[i]
+                ):
                     hit = True
                     self.score += 1
                     break
@@ -88,7 +91,7 @@ class Battleship:
         """
         try:
             guess = int(guess)
-            if (guess < 0 or guess >= self.size):
+            if guess < 0 or guess >= self.size:
                 raise ValueError(f"the value must be between 0 and {self.size - 1}")
             return True
         except Exception as e:
@@ -140,14 +143,26 @@ def check_inputs(choice):
 
 while True:
     try:
-        size = int(input("How many rows and columns would you like to create?\n "
-                         "Please select a number between 3 and 9 "))
+        size = int(
+            input(
+                "How many rows and columns would you like to create?\n "
+                "Please select a number between 3 and 9 "
+            )
+        )
         size = check_inputs(size)
-        ships = int(input("How many ships would you like to be on the board?\n "
-                          "Please select a number between 3 and 9 "))
+        ships = int(
+            input(
+                "How many ships would you like to be on the board?\n "
+                "Please select a number between 3 and 9 "
+            )
+        )
         ships = check_inputs(ships)
-        turns = int(input("How many turns would you like to have to play?\n "
-                          "Please select a number between 3 and 9 "))
+        turns = int(
+            input(
+                "How many turns would you like to have to play?\n "
+                "Please select a number between 3 and 9 "
+            )
+        )
         turns = check_inputs(turns)
         break
     except ValueError:
