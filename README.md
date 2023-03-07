@@ -29,3 +29,7 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 
 -----
 Happy coding!
+
+Debugging
+
+Found a bug which took me ages to debug where my while loop was never ending. It was really hard to find at the beginning, but mentor greatly helped me with debugging.

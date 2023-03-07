@@ -8,6 +8,7 @@ class Battleship:
     a minimum of 4 to a maximum of 8, for playability reasons.
     """
     def __init__(self, board_size, nr_ships, nr_turns):
+        print("start of init")
         self.size = board_size
         self.ships = nr_ships
         self.turns = nr_turns
@@ -20,12 +21,12 @@ class Battleship:
         self.score = 0
 
         # Creates the board without showing ships positions
-        for i in range(size):
-            self.board.append(["O"] * size)
-            self.pc_board.append(["O"] * size)
+        for i in range(self.size):
+            self.board.append(["O"] * self.size)
+            self.pc_board.append(["O"] * self.size)
 
         # Creates randomly the ships position for pc and player
-        for i in range(ships):
+        for i in range(self.ships):
             row, col = self._generate_ship_location()
             self.ship_row.append(row)
             self.ship_col.append(col)
@@ -33,6 +34,8 @@ class Battleship:
             row, col = self._generate_ship_location()
             self.ship_row_pc.append(row)
             self.ship_col_pc.append(col)
+
+        print("end of init")
 
     def play(self):
         """
@@ -43,18 +46,20 @@ class Battleship:
         self.print_boards()
         for turn in range(self.turns):
             print("\nTurn", turn + 1, "\n")
-            while True:
+            choice = False
+            while not choice:
                 guess_row = int(input(f"Guess row (0-{self.size - 1})"))
                 guess_col = int(input(f"Guess column (0-{self.size - 1})"))
-                t = self.validate_choice(guess_row, guess_col)
+                choice = self.validate_choice(guess_row, guess_col)
 
-                if t:
+                if choice:
                     print("\nFire!!\n")
                     self.pc_board[guess_row][guess_col] = "X"  # changes the O into X
                     break
 
             for i in range(self.ships):
-                if guess_row == self.ship_row_pc[i] and guess_col == self.ship_col_pc[i]:
+                if (guess_row == self.ship_row_pc[i] and
+                    guess_col == self.ship_col_pc[i]):
                     hit = True
                     self.score += 1
                     break
@@ -97,11 +102,13 @@ class Battleship:
         Generate the random position of the ships,
         without showing it visually on the screen.
         """
+        print("Generate ship start")
         while True:
             row = randint(0, self.size - 1)
             col = randint(0, self.size - 1)
             if row not in self.ship_row and col not in self.ship_col:
                 return row, col
+        print("End of generate ships")
 
     def _show_board(self, board):
         """
@@ -134,20 +141,23 @@ def check_inputs(choice):
             break
     return choice
 
+while True:
+    try:
+        size = int(input("How many rows and columns would you like to create?\n "
+                        "Please select a number between 3 and 9 "))
+        size = check_inputs(size)
+        ships = int(input("How many ships would you like to be on the board?\n "
+                        "Please select a number between 3 and 9 "))
+        ships = check_inputs(ships)
+        turns = int(input("How many turns would you like to have to play?\n "
+                        "Please select a number between 3 and 9 "))
+        turns = check_inputs(turns)
+        break
+    except ValueError:
+        print("Invalid input! Please enter a valid integer value.")
 
-try:
-    size = int(input("How many rows and columns would you like to create?\n "
-                     "Please select a number between 3 and 9 "))
-    size = check_inputs(size)
-    ships = int(input("How many ships would you like to be on the board?\n "
-                      "Please select a number between 3 and 9 "))
-    ships = check_inputs(ships)
-    turns = int(input("How many turns would you like to have to play?\n "
-                      "Please select a number between 3 and 9 "))
-    turns = check_inputs(turns)
-except ValueError:
-    print("Invalid input! Please enter a valid integer value.")
-
-
+print(size)
+print(ships)
+print(turns)
 game = Battleship(size, ships, turns)
 game.play()
