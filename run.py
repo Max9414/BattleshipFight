@@ -55,22 +55,30 @@ class Battleship:
         self.print_boards()
         for turn in range(self.turns):
             print("\nTurn", turn + 1, "\n")
-            choice = False
-            while not choice:
-                guess_row = input(f"Select row (0-{self.size - 1})")
-                choice = self.validate_choice(guess_row)
-            choice = False
-            while not choice:
-                guess_col = input(f"Select column (0-{self.size - 1})")
-                choice = self.validate_choice(guess_col)
+            not_selected = False
+            while not not_selected:
+                choice = False
+                while not choice:
+                    guess_row = input(f"Select row (0-{self.size - 1})")
+                    choice = self.validate_choice(guess_row)
+                choice = False
+                while not choice:
+                    guess_col = input(f"Select column (0-{self.size - 1})")
+                    choice = self.validate_choice(guess_col)
 
-            if choice:
                 guess_row = int(guess_row)
                 guess_col = int(guess_col)
-                print("\nFire!!\n")
-                self.pc_board[guess_row][
-                    guess_col
-                ] = "X"  # changes the O into X
+
+                if self.pc_board[guess_row][guess_col] != "X":
+                    not_selected = True
+                else:
+                    print("You shot here already, select again!")
+
+                if not_selected:
+                    print("\nFire!!\n")
+                    self.pc_board[guess_row][
+                        guess_col
+                    ] = "X"  # changes the O into X
 
             for i in range(self.ships):
                 if (
