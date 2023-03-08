@@ -38,12 +38,6 @@ class Battleship:
             )
             self.ship_row_pc.append(row)
             self.ship_col_pc.append(col)
-            print(
-                self.ship_row,
-                self.ship_col,
-                self.ship_row_pc,
-                self.ship_col_pc,
-            )
 
     def play(self):
         """
