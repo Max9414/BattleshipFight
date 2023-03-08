@@ -27,7 +27,6 @@ class Battleship:
 
         # Creates randomly the ships position for pc and player
         for i in range(self.ships):
-            input("Press enter to continue...")
             row, col = self._generate_ship_location(
                 self.ship_row, self.ship_col
             )
@@ -125,23 +124,17 @@ class Battleship:
         Generate the random position of the ships,
         without showing it visually on the screen.
         """
-        print("Beginning")
         while True:
             row = randint(0, self.size - 1)
             col = randint(0, self.size - 1)
             counter = 0
-            print(ship_row)
             if not ship_row:
                 return row, col
             for j, i in zip(ship_row, ship_col):
-                print(j)
-                print(i)
-                print(len(ship_row))
                 if row != j or col != i:
                     counter += 1
             if counter == len(ship_row):
                 break
-        print("End")
         return row, col
 
     def _show_board(self, board):
