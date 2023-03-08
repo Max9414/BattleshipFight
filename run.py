@@ -19,6 +19,7 @@ class Battleship:
         self.ship_row_pc = []
         self.ship_col_pc = []
         self.score = 0
+        self.pc_score = 0
 
         # Creates the board without showing ships positions
         for i in range(self.size):
@@ -93,6 +94,8 @@ class Battleship:
                 else:
                     print("Nice try, shoot again!\n")
 
+            print(f"Your score is {self.score}\n")
+            print(f"The pc score is {self.pc_score}\n")
             self.print_boards()
 
             if self.score == self.ships:
