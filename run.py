@@ -42,23 +42,26 @@ class Battleship:
 
     def play(self):
         """
-        Method that starts the game and allows player to play
+        Starts the game and allows player to play
         It will keep asking for coordinates till valid ones are chosen.
         """
         print("Let's play!\n")
-        self.print_boards()
+        self._print_boards()
         for turn in range(self.turns):
             print("\nTurn", turn + 1, "\n")
             not_selected = False
             while not not_selected:
+                # if row and col already selected, the loop will continue
                 choice = False
                 while not choice:
+                    # if choice is not correct, the loop will continue
                     guess_row = input(f"Select row (0-{self.size - 1})")
-                    choice = self.validate_choice(guess_row)
+                    choice = self._validate_choice(guess_row)
                 choice = False
                 while not choice:
+                    # if choice is not correct, the loop will continue
                     guess_col = input(f"Select column (0-{self.size - 1})")
-                    choice = self.validate_choice(guess_col)
+                    choice = self._validate_choice(guess_col)
 
                 guess_row = int(guess_row)
                 guess_col = int(guess_col)
@@ -87,22 +90,24 @@ class Battleship:
 
             if hit:
                 print("Good Job! You hit a Battleship!!\n")
+
+            if turn == self.turns - 1:
+                print("Nice try, your chances are over!")
+                break
             else:
-                if turn == self.turns - 1:
-                    print("Nice try, your chances are over!")
-                    break
-                else:
-                    print("Nice try, shoot again!\n")
+                print("Nice try, shoot again!\n")
+
+            self._pc_choice()
 
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
-            self.print_boards()
+            self._print_boards()
 
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
                 break
 
-    def validate_choice(self, guess):
+    def _validate_choice(self, guess):
         """
         Checks if choices input are valid
         """
@@ -115,11 +120,17 @@ class Battleship:
             return True
         except Exception as e:
             print(f"Invalid data: {e}, please try again.\n")
+            return False
 
     def _generate_ship_location(self, ship_row, ship_col):
-        """
-        Generate the random position of the ships,
-        without showing it visually on the screen.
+        """Generate random position of the boats
+
+        Args:
+            ship_row (list): list of integers
+            ship_col (list): list of integers
+
+        Returns:
+            int: int for row and column
         """
         while True:
             row = randint(0, self.size - 1)
@@ -141,7 +152,7 @@ class Battleship:
         for row in board:
             print(" ".join(row))
 
-    def print_boards(self):
+    def _print_boards(self):
         """
         To avoid repetition, created method to print the boards
         to play the game that will be used at the beginning and
@@ -152,6 +163,14 @@ class Battleship:
         print("\nPC board\n")
         self._show_board(self.pc_board)
 
+    def _pc_choice(self):
+        """
+        Uses randint to make the selection:
+        where is the pc shooting
+        """
+        row = randint(0, self.size - 1)
+        col = randint(0, self.size - 1)
+
 
 def check_inputs(choice):
     """
@@ -159,7 +178,9 @@ def check_inputs(choice):
     """
     while True:
         if choice >= 10 or choice < 3:
-            choice = int(input("Please select a number between 3 and 9 "))
+            choice = int(
+                input("Invalid input, please select a number between 3 and 9 ")
+            )
         else:
             print(f"{choice} selected")
             break
