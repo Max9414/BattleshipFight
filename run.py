@@ -108,11 +108,11 @@ class Battleship:
                 pc_col = randint(0, self.size - 1)
                 if self.board[pc_row][pc_col] != "X":
                     not_selected = True
-                    self.board[pc_row][pc_col] = "X"
                     if self.board[pc_row][pc_col] == "@":
                         hit = True
                     else:
                         hit = False
+                    self.board[pc_row][pc_col] = "X"
             if hit:
                 print(
                     f"The pc shot at the position {pc_row}, {pc_col} and hit a ship!\n "
@@ -125,15 +125,21 @@ class Battleship:
 
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
-            self._print_boards()
 
             if turn == self.turns - 1:
                 print("\nGame over!")
+                print("\nTake a look at where you shot each other!")
+                self._print_boards()
                 break
 
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
+                print("\nTake a look at where you shot each other!")
+                self._print_boards()
                 break
+
+            input("Press Enter to go to the next round!")
+            self._print_boards()
 
     def _validate_choice(self, guess):
         """
