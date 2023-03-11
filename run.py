@@ -63,14 +63,18 @@ class Battleship:
                     guess_col = input(f"Select column (0-{self.size - 1})")
                     choice = self._validate_choice(guess_col)
 
+                # as value is already being checked, we can transorm
+                # the values into integers
                 guess_row = int(guess_row)
                 guess_col = int(guess_col)
 
+                # check if position has already been selected
                 if self.pc_board[guess_row][guess_col] != "X":
                     not_selected = True
                 else:
                     print("You shot here already, select again!")
 
+                # if position has not been selected, shoots
                 if not_selected:
                     print("\nFire!!\n")
                     self.pc_board[guess_row][
@@ -87,6 +91,26 @@ class Battleship:
                     break
                 else:
                     hit = False
+
+            not_selected = False
+            print("PC turn\n")
+            while not not_selected:
+                pc_row = randint(0, self.size - 1)
+                pc_col = randint(0, self.size - 1)
+                if self.board[pc_row][pc_col] != "X":
+                    not_selected = True
+                    if self.board[pc_row][pc_col] == "@":
+                        hit = True
+                    else:
+                        hit = False
+            if hit:
+                print(
+                    f"The pc shot at the position {pc_row}, {pc_col} and hit a ship! "
+                )
+            else:
+                print(
+                    f"The pc shot at the position {pc_row}, {pc_col} and ... splash! It's just water "
+                )
 
             if hit:
                 print("Good Job! You hit a Battleship!!\n")
@@ -162,14 +186,6 @@ class Battleship:
         self._show_board(self.board)
         print("\nPC board\n")
         self._show_board(self.pc_board)
-
-    def _pc_choice(self):
-        """
-        Uses randint to make the selection:
-        where is the pc shooting
-        """
-        row = randint(0, self.size - 1)
-        col = randint(0, self.size - 1)
 
 
 def check_inputs(choice):
