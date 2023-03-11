@@ -97,7 +97,6 @@ class Battleship:
 
             if turn == self.turns - 1:
                 print("Nice try, your chances are over!")
-                break
 
             if not hit:
                 print("Nice try, shoot again!\n")
@@ -127,6 +126,10 @@ class Battleship:
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
             self._print_boards()
+
+            if turn == self.turns - 1:
+                print("\nGame over!")
+                break
 
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
