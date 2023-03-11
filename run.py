@@ -92,6 +92,16 @@ class Battleship:
                 else:
                     hit = False
 
+            if hit:
+                print("Good Job! You hit a Battleship!!\n")
+
+            if turn == self.turns - 1:
+                print("Nice try, your chances are over!")
+                break
+
+            if not hit:
+                print("Nice try, shoot again!\n")
+
             not_selected = False
             print("PC turn\n")
             while not not_selected:
@@ -99,29 +109,20 @@ class Battleship:
                 pc_col = randint(0, self.size - 1)
                 if self.board[pc_row][pc_col] != "X":
                     not_selected = True
+                    self.board[pc_row][pc_col] = "X"
                     if self.board[pc_row][pc_col] == "@":
                         hit = True
                     else:
                         hit = False
             if hit:
                 print(
-                    f"The pc shot at the position {pc_row}, {pc_col} and hit a ship! "
+                    f"The pc shot at the position {pc_row}, {pc_col} and hit a ship!\n "
                 )
+                self.pc_score += 1
             else:
                 print(
-                    f"The pc shot at the position {pc_row}, {pc_col} and ... splash! It's just water "
+                    f"The pc shot at the position {pc_row}, {pc_col} and ... splash! It's just water\n "
                 )
-
-            if hit:
-                print("Good Job! You hit a Battleship!!\n")
-
-            if turn == self.turns - 1:
-                print("Nice try, your chances are over!")
-                break
-            else:
-                print("Nice try, shoot again!\n")
-
-            self._pc_choice()
 
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
