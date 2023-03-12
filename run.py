@@ -6,7 +6,7 @@ class Battleship:
     """
     Game class. The class will provide the player with the choice
     to create the grid with as many rows and columns he wants from
-    a minimum of 4 to a maximum of 8, for playability reasons.
+    a minimum of 3 to a maximum of 9, for playability reasons.
     """
 
     def __init__(self, board_size, nr_ships, nr_turns):
@@ -48,6 +48,7 @@ class Battleship:
         """
         print("Let's play!\n")
         self._print_boards()
+        # keeps playing till all the ships are destroyed or turns are over
         for turn in range(self.turns):
             print("\nTurn", turn + 1, "\n")
             not_selected = False
@@ -82,6 +83,7 @@ class Battleship:
                         guess_col
                     ] = "X"  # changes the O into X
 
+            # checks if ship has been hit or not
             for i in range(self.ships):
                 if (
                     guess_row == self.ship_row_pc[i]
@@ -93,6 +95,7 @@ class Battleship:
                 else:
                     hit = False
 
+            # different messages if ships are hit or not and if turns are over
             if hit:
                 time.sleep(1)
                 print("Good Job! You hit a Battleship!!\n")
@@ -103,8 +106,9 @@ class Battleship:
 
             if not hit and turn < self.turns - 1:
                 time.sleep(1)
-                print("Nice try, shoot again!\n")
+                print("Splash, it's just water!\n")
 
+            # logic for the PC, following the same human passages
             not_selected = False
             time.sleep(1)
             print("PC turn\n")
@@ -118,6 +122,7 @@ class Battleship:
                     else:
                         hit = False
                     self.board[pc_row][pc_col] = "X"
+            # messages if ship has been hit or not
             if hit:
                 time.sleep(1)
                 print(
@@ -131,25 +136,31 @@ class Battleship:
                 )
 
             time.sleep(1)
+            # Prints player and pc score
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
 
             time.sleep(1)
+            # If turns are over, ends the game
             if turn == self.turns - 1:
                 print("\nGame over!")
                 print("\nTake a look at where you shot each other!\n")
                 self._print_boards()
                 break
 
+            # if all ships have been destroyed, ends the game
             if self.score == self.ships:
                 print("You destroyed all the ships! Good job!!\n")
                 print("\nTake a look at where you shot each other!")
                 self._print_boards()
                 break
 
+            # input to go to next round, to give the player the time to
+            # read all the print messages
             input("Press Enter to go to the next round!")
             self._print_boards()
 
+        # checks who won and displays the score
         time.sleep(1)
         if self.score == self.pc_score:
             print(f"It's a tie! You both hit {self.score} ships!")
@@ -163,8 +174,18 @@ class Battleship:
             )
 
     def _validate_choice(self, guess):
-        """
-        Checks if choices input are valid
+        """checks if valor input is correct, otherwise gives
+        a message error
+
+        Args:
+            guess (int): guess should be an int value
+
+        Raises:
+            ValueError: if value is lower than 0 or higher than the
+            selected number of rows/cols
+
+        Returns:
+            boolean: returns True if value input is an integer
         """
         try:
             guess = int(guess)
@@ -203,6 +224,7 @@ class Battleship:
     def _show_board(self, board):
         """
         Generate the board in a suitable way to play battleship.
+        It's for both player and pc board
         """
         for row in board:
             print(" ".join(row))
