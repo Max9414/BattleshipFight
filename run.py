@@ -101,7 +101,7 @@ class Battleship:
                 time.sleep(1)
                 print("Nice try, your chances are over!")
 
-            if not hit:
+            if not hit and turn < self.turns - 1:
                 time.sleep(1)
                 print("Nice try, shoot again!\n")
 
@@ -137,7 +137,7 @@ class Battleship:
             time.sleep(1)
             if turn == self.turns - 1:
                 print("\nGame over!")
-                print("\nTake a look at where you shot each other!")
+                print("\nTake a look at where you shot each other!\n")
                 self._print_boards()
                 break
 
@@ -149,6 +149,18 @@ class Battleship:
 
             input("Press Enter to go to the next round!")
             self._print_boards()
+
+        time.sleep(1)
+        if self.score == self.pc_score:
+            print(f"It's a tie! You both hit {self.score} ships!")
+        elif self.score > self.pc_score:
+            print(
+                f"Congratulations! You won with a score of {self.score} vs {self.pc_score}"
+            )
+        else:
+            print(
+                f"Better luck next time! The pc won with a score of {self.pc_score} vs {self.score}"
+            )
 
     def _validate_choice(self, guess):
         """
