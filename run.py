@@ -1,4 +1,5 @@
 from random import randint
+import time
 
 
 class Battleship:
@@ -93,15 +94,19 @@ class Battleship:
                     hit = False
 
             if hit:
+                time.sleep(1)
                 print("Good Job! You hit a Battleship!!\n")
 
             if turn == self.turns - 1:
+                time.sleep(1)
                 print("Nice try, your chances are over!")
 
             if not hit:
+                time.sleep(1)
                 print("Nice try, shoot again!\n")
 
             not_selected = False
+            time.sleep(1)
             print("PC turn\n")
             while not not_selected:
                 pc_row = randint(0, self.size - 1)
@@ -114,18 +119,22 @@ class Battleship:
                         hit = False
                     self.board[pc_row][pc_col] = "X"
             if hit:
+                time.sleep(1)
                 print(
                     f"The pc shot at the position {pc_row}, {pc_col} and hit a ship!\n "
                 )
                 self.pc_score += 1
             else:
+                time.sleep(1)
                 print(
                     f"The pc shot at the position {pc_row}, {pc_col} and ... splash! It's just water\n "
                 )
 
+            time.sleep(1)
             print(f"Your score is {self.score}\n")
             print(f"The pc score is {self.pc_score}\n")
 
+            time.sleep(1)
             if turn == self.turns - 1:
                 print("\nGame over!")
                 print("\nTake a look at where you shot each other!")
