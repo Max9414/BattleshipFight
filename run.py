@@ -221,7 +221,8 @@ class Battleship:
                 break
         return row, col
 
-    def _show_board(self, board):
+    @staticmethod
+    def _show_board(board):
         """
         Generate the board in a suitable way to play battleship.
         It's for both player and pc board
@@ -236,9 +237,9 @@ class Battleship:
         end for the play metod
         """
         print("Your board\n")
-        self._show_board(self.board)
+        Battleship._show_board(self.board)
         print("\nPC board\n")
-        self._show_board(self.pc_board)
+        Battleship._show_board(self.pc_board)
 
 
 def check_inputs(choice):
