@@ -1,13 +1,5 @@
-# Rock Paper Scissors Lizard Spock
+# Battleship game
 
-RPSLS is an easy game designed for any type of audience, especially for fans of the serie "The Bigbang Theory", as this version of the game became popular because of it. To make it a bit more exciting, the game presents 3 possible variations:
-- classic
-- 5vs5
-- random
-
-![Responsice Mockup](assets/image/readmeimages/AmIResponsive.png)
-
-# [Visit the game here](https://max9414.github.io/RPSLS/)
 
 # All the titles bring back to the Table of Content
 
@@ -88,6 +80,8 @@ One of the hardest errors I faced was with an if statement, where a small word a
 
 
 ### [Validator Testing](#table-of-content) 
+
+Searched for validators online but didn't really find anything for python.
 
 ### [Unfixed Bugs](#table-of-content)
 
